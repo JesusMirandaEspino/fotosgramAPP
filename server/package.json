@@ -1,0 +1,11 @@
+{
+  "name": "fotosgram",
+  "version": "1.0.0",
+  "description": "Ionic App fotos gram",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jesus miranda",
+  "license": "ISC"
+}
