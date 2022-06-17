@@ -13,6 +13,18 @@ class Token {
             usuario: payload
         }, this.seed, { expiresIn: this.caducidad });
     }
+    static comprobarToken(userToken) {
+        jsonwebtoken_1.default.verify(userToken, this.seed, (err, decoded) => {
+            return new Promise((resolve, reject) => {
+                if (err) {
+                    reject();
+                }
+                else {
+                    resolve(decoded);
+                }
+            });
+        });
+    }
 }
 exports.default = Token;
 Token.seed = 'este-es-el-seed-de-mi-app-secreto';

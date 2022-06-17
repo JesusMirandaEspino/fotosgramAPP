@@ -14,6 +14,17 @@ export default class Token {
         }, this.seed, { expiresIn: this.caducidad })
     }
 
-   
+    static comprobarToken( userToken: string ){
+        jwt.verify( userToken, this.seed, ( err, decoded ) => {
+
+            return new Promise( ( resolve, reject ) => {
+                if( err ){
+                    reject();
+                }else{
+                    resolve(decoded);
+                }
+            })
+        })
+    }
 
 }
