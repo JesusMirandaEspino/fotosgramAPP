@@ -66,4 +66,9 @@ usarRouter.post('/create', (_req, _res) => {
         });
     });
 });
+usarRouter.post('/update', (_req, _res) => {
+    _res.json({
+        ok: true,
+    });
+});
 exports.default = usarRouter;

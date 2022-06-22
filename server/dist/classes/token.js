@@ -14,8 +14,8 @@ class Token {
         }, this.seed, { expiresIn: this.caducidad });
     }
     static comprobarToken(userToken) {
-        jsonwebtoken_1.default.verify(userToken, this.seed, (err, decoded) => {
-            return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
+            jsonwebtoken_1.default.verify(userToken, this.seed, (err, decoded) => {
                 if (err) {
                     reject();
                 }

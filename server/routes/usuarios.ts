@@ -86,4 +86,12 @@ usarRouter.post( '/create', ( _req: Request, _res: Response ) => {
 });
 
 
+usarRouter.post( '/update', ( _req: Request, _res: Response ) => {
+
+    _res.json({
+            ok: true,
+        });
+});
+
+
 export default usarRouter;
