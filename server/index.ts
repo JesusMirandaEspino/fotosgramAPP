@@ -2,6 +2,7 @@ import Server from "./classes/server";
 import usarRouter from "./routes/usuarios";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
+import postRouter from "./routes/post";
 
 const server = new Server();
 
@@ -11,7 +12,7 @@ server.app.use( bodyParser.urlencoded({ extended: true }) );
 server.app.use( bodyParser.json() );
 
 server.app.use( '/user', usarRouter );
-
+server.app.use( '/posts', postRouter );
 
 // conectar mongo
 mongoose.connect( 'mongodb://localhost:27017/fotosgram', ( err ) => {

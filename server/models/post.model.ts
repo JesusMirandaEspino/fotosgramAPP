@@ -29,9 +29,9 @@ postSchema.pre<IPost>( 'save', function ( next ) {
 interface IPost extends Document {
     created: Date;
     mensaje: string;
-    img: string;
+    img: string[];
     coords: string;
     usuario: string;
 } 
 
-export const post = model<IPost>('Post', Schema);
+export const Post = model<IPost>('Post', postSchema);
