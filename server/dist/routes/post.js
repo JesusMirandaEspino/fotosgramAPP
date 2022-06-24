@@ -13,6 +13,21 @@ const express_1 = require("express");
 const authentication_1 = require("../middlewares/authentication");
 const post_model_1 = require("../models/post.model");
 const postRouter = (0, express_1.Router)();
+postRouter.get('/', (_req, _res) => __awaiter(void 0, void 0, void 0, function* () {
+    let pagina = Number(_req.query.pagina) || 1;
+    let skip = pagina - 1;
+    skip = skip * 10;
+    const posts = yield post_model_1.Post.find()
+        .sort({ _id: -1 })
+        .skip(skip)
+        .limit(10)
+        .populate('usuario', '-password')
+        .exec();
+    _res.json({
+        ok: true,
+        posts
+    });
+}));
 postRouter.post('/', [authentication_1.verificaToken], (_req, _res) => {
     const body = _req.body;
     body.usuario = _req.body._id;
