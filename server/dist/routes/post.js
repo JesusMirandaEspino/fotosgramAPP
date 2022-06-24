@@ -39,4 +39,23 @@ postRouter.post('/', [authentication_1.verificaToken], (_req, _res) => {
         });
     }));
 });
+postRouter.post('/upload', [authentication_1.verificaToken], (_req, _res) => {
+    if (!_req.files) {
+        return _res.status(400).json({
+            ok: false,
+            mensaje: 'No se subio ningun Archivo'
+        });
+    }
+    const file = _req.files.image;
+    if (!_req.files) {
+        return _res.status(400).json({
+            ok: false,
+            mensaje: 'No se subio ningun Archivo -img'
+        });
+    }
+    _res.status(400).json({
+        ok: true,
+        file: file.mimetype
+    });
+});
 exports.default = postRouter;
