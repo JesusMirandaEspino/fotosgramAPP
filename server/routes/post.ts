@@ -1,10 +1,11 @@
 import { Request, Response, Router } from 'express';
+import FileSystem from '../classes/fileSystem';
 import { FileUpload } from '../interfaces/file-upload';
 import { verificaToken } from '../middlewares/authentication';
 import { Post } from '../models/post.model';
 
 const postRouter = Router();
-
+const fileSystem = new FileSystem();
 
     postRouter.get( '/', async ( _req: Request, _res: Response ) => {
 
@@ -57,12 +58,21 @@ const postRouter = Router();
         const file: FileUpload | FileUpload[] | any = _req.files.image;
 
 
-        if( !_req.files ){
+        if( !file ){
             return _res.status(400).json({
                 ok: false,
                 mensaje: 'No se subio ningun Archivo -img'
             });
         }
+
+        if( !file.mimetype.includes( 'image' ) ){
+            return _res.status(400).json({
+                ok: false,
+                mensaje: 'No se subio ningun Archivo -img'
+            });
+        }
+
+        fileSystem.guardarImagenTemporal( file,  _req.usuario._id );
 
             _res.status(400).json({
                 ok: true,

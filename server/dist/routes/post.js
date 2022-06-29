@@ -8,11 +8,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
+const fileSystem_1 = __importDefault(require("../classes/fileSystem"));
 const authentication_1 = require("../middlewares/authentication");
 const post_model_1 = require("../models/post.model");
 const postRouter = (0, express_1.Router)();
+const fileSystem = new fileSystem_1.default();
 postRouter.get('/', (_req, _res) => __awaiter(void 0, void 0, void 0, function* () {
     let pagina = Number(_req.query.pagina) || 1;
     let skip = pagina - 1;
@@ -47,12 +52,19 @@ postRouter.post('/upload', [authentication_1.verificaToken], (_req, _res) => {
         });
     }
     const file = _req.files.image;
-    if (!_req.files) {
+    if (!file) {
         return _res.status(400).json({
             ok: false,
             mensaje: 'No se subio ningun Archivo -img'
         });
     }
+    if (!file.mimetype.includes('image')) {
+        return _res.status(400).json({
+            ok: false,
+            mensaje: 'No se subio ningun Archivo -img'
+        });
+    }
+    fileSystem.guardarImagenTemporal(file, _req.usuario._id);
     _res.status(400).json({
         ok: true,
         file: file.mimetype
