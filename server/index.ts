@@ -14,7 +14,7 @@ server.app.use( bodyParser.json() );
 
 
 // fileupload
-server.app.use( fileUpload() );
+server.app.use( fileUpload({ useTempFiles: true }) );
 
 server.app.use( '/user', usarRouter );
 server.app.use( '/posts', postRouter );

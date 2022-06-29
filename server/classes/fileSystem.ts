@@ -11,8 +11,18 @@ export default class FileSystem {
 
     guardarImagenTemporal( file: FileUpload, userId: string ){
 
+        return new Promise<void>( ( resolve, reject ): void => {
         const _path = this.crearCarpetaUsuario( userId );
         const nombreArchivo = this.generarNombreUnico( file.name );
+
+        file.mv( `${ _path }/${ nombreArchivo }`, (err: any): void => {
+            if( err ){
+                reject(err);
+            }else{
+                resolve();
+            }
+        });
+        });
 
     }
 

@@ -46,7 +46,7 @@ const fileSystem = new FileSystem();
 
 
 
-    postRouter.post( '/upload', [ verificaToken ], ( _req: Request, _res: Response ) => {
+    postRouter.post( '/upload', [ verificaToken ], async ( _req: Request, _res: Response ) => {
 
         if( !_req.files ){
             return _res.status(400).json({
@@ -72,7 +72,7 @@ const fileSystem = new FileSystem();
             });
         }
 
-        fileSystem.guardarImagenTemporal( file,  _req.usuario._id );
+        await fileSystem.guardarImagenTemporal( file,  _req.body.usuario._id );
 
             _res.status(400).json({
                 ok: true,

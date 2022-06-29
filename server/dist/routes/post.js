@@ -44,7 +44,7 @@ postRouter.post('/', [authentication_1.verificaToken], (_req, _res) => {
         });
     }));
 });
-postRouter.post('/upload', [authentication_1.verificaToken], (_req, _res) => {
+postRouter.post('/upload', [authentication_1.verificaToken], (_req, _res) => __awaiter(void 0, void 0, void 0, function* () {
     if (!_req.files) {
         return _res.status(400).json({
             ok: false,
@@ -64,10 +64,10 @@ postRouter.post('/upload', [authentication_1.verificaToken], (_req, _res) => {
             mensaje: 'No se subio ningun Archivo -img'
         });
     }
-    fileSystem.guardarImagenTemporal(file, _req.usuario._id);
+    yield fileSystem.guardarImagenTemporal(file, _req.body.usuario._id);
     _res.status(400).json({
         ok: true,
         file: file.mimetype
     });
-});
+}));
 exports.default = postRouter;
