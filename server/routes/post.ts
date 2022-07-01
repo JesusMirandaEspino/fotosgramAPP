@@ -85,4 +85,19 @@ const fileSystem = new FileSystem();
 
     });
 
+
+    postRouter.get( '/imagen/:userId/:img',  ( _req: any, _res: Response ) => {
+
+        const userId = _req.params.userId;
+        const img = _req.params.img;
+
+        const pathFoto = fileSystem.getFotoUrl( userId,  img  );
+
+        _res.json({
+            userId,
+            img
+        })
+
+    });
+
 export default postRouter;

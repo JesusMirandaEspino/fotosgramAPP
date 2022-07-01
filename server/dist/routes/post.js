@@ -72,4 +72,13 @@ postRouter.post('/upload', [authentication_1.verificaToken], (_req, _res) => __a
         file: file.mimetype
     });
 }));
+postRouter.get('/imagen/:userId/:img', (_req, _res) => {
+    const userId = _req.params.userId;
+    const img = _req.params.img;
+    const pathFoto = fileSystem.getFotoUrl(userId, img);
+    _res.json({
+        userId,
+        img
+    });
+});
 exports.default = postRouter;
