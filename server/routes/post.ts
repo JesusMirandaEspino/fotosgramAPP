@@ -32,7 +32,9 @@ const fileSystem = new FileSystem();
         const body = _req.body;
         body.usuario = _req.body._id;
 
-        const image = [];
+        const image =  fileSystem.imganesDeTempHaciaPost( _req.body._id );
+
+        body.img = image;
 
         Post.create( body ).then( async (postDB: any) => {
 
