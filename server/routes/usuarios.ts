@@ -123,4 +123,13 @@ usarRouter.post( '/update', verificaToken, ( _req: any, _res: Response ) => {
 });
 
 
+    usarRouter.get( '/', verificaToken, ( _req: any, _res: Response ) => {
+        const usuario = _req.usuario._id;
+
+        _res.json({
+                ok: true,
+                usuario
+            });
+    });
+
 export default usarRouter;

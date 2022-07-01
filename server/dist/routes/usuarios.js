@@ -94,4 +94,11 @@ usarRouter.post('/update', authentication_1.verificaToken, (_req, _res) => {
         });
     });
 });
+usarRouter.get('/', authentication_1.verificaToken, (_req, _res) => {
+    const usuario = _req.usuario._id;
+    _res.json({
+        ok: true,
+        usuario
+    });
+});
 exports.default = usarRouter;
