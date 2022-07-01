@@ -40,5 +40,9 @@ class FileSystem {
         const idUnico = (0, uniqid_1.default)();
         return `${idUnico}.${extension}`;
     }
+    imganesDeTempHaciaPost(userId) {
+        const pathTemp = path_1.default.resolve(__dirname, '../uploads/', userId, 'temp');
+        const pathPost = path_1.default.resolve(__dirname, '../uploads/', userId, 'post');
+    }
 }
 exports.default = FileSystem;

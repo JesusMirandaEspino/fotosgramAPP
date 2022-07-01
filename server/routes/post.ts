@@ -32,7 +32,9 @@ const fileSystem = new FileSystem();
         const body = _req.body;
         body.usuario = _req.body._id;
 
-        Post.create( body ).then( async postDB => {
+        const image = [];
+
+        Post.create( body ).then( async (postDB: any) => {
 
             await postDB.populate('usuario', '-password');
 

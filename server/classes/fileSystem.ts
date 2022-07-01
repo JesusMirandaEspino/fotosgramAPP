@@ -51,4 +51,10 @@ export default class FileSystem {
 
     }
 
+
+    public imganesDeTempHaciaPost( userId: string ){
+        const pathTemp = path.resolve( __dirname, '../uploads/', userId, 'temp'  );
+        const pathPost = path.resolve( __dirname, '../uploads/', userId, 'post'  );
+    }
+
 }
