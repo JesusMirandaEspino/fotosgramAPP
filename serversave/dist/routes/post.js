@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -15,10 +16,10 @@ const express_1 = require("express");
 const autenticacion_1 = require("../middlewares/autenticacion");
 const post_model_1 = require("../models/post.model");
 const file_system_1 = __importDefault(require("../classes/file-system"));
-const postRoutes = express_1.Router();
+const postRoutes = (0, express_1.Router)();
 const fileSystem = new file_system_1.default();
 // Obtener POST paginados
-postRoutes.get('/', (req, res) => __awaiter(this, void 0, void 0, function* () {
+postRoutes.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let pagina = Number(req.query.pagina) || 1;
     let skip = pagina - 1;
     skip = skip * 10;
@@ -40,7 +41,7 @@ postRoutes.post('/', [autenticacion_1.verificaToken], (req, res) => {
     body.usuario = req.usuario._id;
     const imagenes = fileSystem.imagenesDeTempHaciaPost(req.usuario._id);
     body.imgs = imagenes;
-    post_model_1.Post.create(body).then((postDB) => __awaiter(this, void 0, void 0, function* () {
+    post_model_1.Post.create(body).then((postDB) => __awaiter(void 0, void 0, void 0, function* () {
         yield postDB.populate('usuario', '-password').execPopulate();
         res.json({
             ok: true,
@@ -51,7 +52,7 @@ postRoutes.post('/', [autenticacion_1.verificaToken], (req, res) => {
     });
 });
 // Servicio para subir archivos
-postRoutes.post('/upload', [autenticacion_1.verificaToken], (req, res) => __awaiter(this, void 0, void 0, function* () {
+postRoutes.post('/upload', [autenticacion_1.verificaToken], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (!req.files) {
         return res.status(400).json({
             ok: false,

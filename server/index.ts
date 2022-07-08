@@ -3,7 +3,8 @@ import usarRouter from "./routes/usuarios";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import postRouter from "./routes/post";
-import fileUpload from "express-fileupload"
+import fileUpload from "express-fileupload";
+import cors from 'cors';
 
 const server = new Server();
 
@@ -16,6 +17,14 @@ server.app.use( bodyParser.json() );
 // fileupload
 server.app.use( fileUpload({ useTempFiles: true }) );
 
+
+// Cors
+server.app.use( cors({ 
+        origin: true, 
+        credentials: true
+    }));
+
+
 server.app.use( '/user', usarRouter );
 server.app.use( '/posts', postRouter );
 
@@ -24,8 +33,6 @@ mongoose.connect( 'mongodb://localhost:27017/fotosgram', ( err ) => {
     if( err ){ throw err; }
     console.log( 'Base de datos Online' );
 });
-
-
 
 
 // levantar express
